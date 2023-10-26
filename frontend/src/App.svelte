@@ -7,7 +7,6 @@
 	import Admin from "./pages/admin/Admin.svelte";
 	import Adminrule from "./pages/adminrule/Adminrule.svelte";
 	import Pattern from "./pages/pattern/Pattern.svelte";
-	import Currency from "./pages/currency/Currency.svelte";
 	import Company from "./pages/company/Company.svelte";
 	import Listpattern from "./pages/listpattern/Listpattern.svelte";
 	import Listpoint from "./pages/listpoint/Listpoint.svelte";
@@ -71,13 +70,7 @@
 					table_body_font: table_body_font,
 				},
 			}),
-			"/currency": wrap({
-				component: Currency,
-				props: {
-					table_header_font: table_header_font,
-					table_body_font: table_body_font,
-				},
-			}),
+		
 			
 			"/admin": wrap({
 				component: Admin,

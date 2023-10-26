@@ -80,7 +80,10 @@
         let flag = true
         let msg = ""
         if(sData == "New"){
-           
+            if(company_field == ""){
+                flag = false
+                msg += "The Company is required\n"
+            }
             if(rule_field == ""){
                 flag = false
                 msg += "The Rule is required\n"
@@ -182,7 +185,6 @@
         }
     }
     function clearField(){
-        company_field = ""
         rule_field = ""
         username_field = ""
         password_field = ""
