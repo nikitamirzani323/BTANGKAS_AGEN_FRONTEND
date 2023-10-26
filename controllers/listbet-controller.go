@@ -10,6 +10,13 @@ import (
 	"github.com/nikitamirzani323/btangkas_agen_frontend/entities"
 )
 
+type responselistbet struct {
+	Status  int         `json:"status"`
+	Message string      `json:"message"`
+	Listbet interface{} `json:"listbet"`
+	Record  interface{} `json:"record"`
+}
+
 func Listbethome(c *fiber.Ctx) error {
 	hostname := c.Hostname()
 	bearToken := c.Get("Authorization")
@@ -28,7 +35,7 @@ func Listbethome(c *fiber.Ctx) error {
 	render_page := time.Now()
 	axios := resty.New()
 	resp, err := axios.R().
-		SetResult(responsedefault{}).
+		SetResult(responselistbet{}).
 		SetAuthToken(token[1]).
 		SetError(responseerror{}).
 		SetHeader("Content-Type", "application/json").
@@ -49,12 +56,13 @@ func Listbethome(c *fiber.Ctx) error {
 	log.Println("  Received At:", resp.ReceivedAt())
 	log.Println("  Body       :\n", resp)
 	log.Println()
-	result := resp.Result().(*responsedefault)
+	result := resp.Result().(*responselistbet)
 	if result.Status == 200 {
 		return c.JSON(fiber.Map{
 			"status":  result.Status,
 			"message": result.Message,
 			"record":  result.Record,
+			"listbet": result.Listbet,
 			"time":    time.Since(render_page).String(),
 		})
 	} else {
@@ -68,10 +76,10 @@ func Listbethome(c *fiber.Ctx) error {
 }
 func ListbetSave(c *fiber.Ctx) error {
 	type payload_listbetsave struct {
-		Page          string  `json:"page"`
-		Sdata         string  `json:"sdata" `
-		Lisbet_id     int     `json:"lisbet_id" `
-		Lisbet_minbet float64 `json:"lisbet_minbet" `
+		Page          string `json:"page"`
+		Sdata         string `json:"sdata" `
+		Lisbet_id     int    `json:"lisbet_id" `
+		Lisbet_minbet int    `json:"lisbet_minbet" `
 	}
 	hostname := c.Hostname()
 	bearToken := c.Get("Authorization")

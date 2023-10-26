@@ -8,6 +8,7 @@
     let token = localStorage.getItem("token");
     let akses_page = false;
     let listHome = [];
+    let listmstbet = [];
     let record = "";
     let record_message = "";
     let totalrecord = 0;
@@ -34,6 +35,7 @@
         }
     }
     async function initHome() {
+        listmstbet = [];
         const res = await fetch("/api/listbet", {
             method: "POST",
             headers: {
@@ -49,6 +51,7 @@
             record_message = json.message;
             if (record != null) {
                 totalrecord = record.length;
+                let record_listbet = json.listbet;
                 let no = 0
                 for (var i = 0; i < record.length; i++) {
                     no = no + 1;
@@ -60,6 +63,14 @@
                             home_minbet: record[i]["lisbet_minbet"],
                             home_create: record[i]["lisbet_create"],
                             home_update: record[i]["lisbet_update"],
+                        },
+                    ];
+                }
+                for (var i = 0; i < record_listbet.length; i++) {
+                    listmstbet = [
+                        ...listmstbet,
+                        {
+                            lisbet_minbet: record_listbet[i]["lisbet_minbet"],
                         },
                     ];
                 }
@@ -89,5 +100,6 @@
     {table_header_font}
     {table_body_font}
     {listHome}
+    {listmstbet}
     {totalrecord}/>
 {/if}

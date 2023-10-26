@@ -12,17 +12,18 @@
 	export let table_body_font = ""
 	export let token = ""
 	export let listHome = []
+	export let listmstbet = []
 	export let totalrecord = 0
     let dispatch = createEventDispatcher();
 	let title_page = "LISTBET"
     let sData = "";
     let myModal_newentry = "";
-    let flag_code = false;
     let flag_btnsave = true;
     let minbet_field = 0;
     let create_field = "";
     let update_field = "";
-    let idrecord = "";
+    let idrecord = 0;
+    let title_minbet = "";
     let searchHome = "";
     let filterHome = [];
     let css_loader = "display: none;";
@@ -45,15 +46,16 @@
         sData = e
         if(sData == "New"){
             clearField()
+            myModal_newentry = new bootstrap.Modal(document.getElementById("modalentrycrud"));
+            myModal_newentry.show();
         }else{
             flag_code = true;
             idrecord = id
-            minbet_field = minbet;
-            create_field = create;
-            update_field = update;
+            title_minbet = minbet;
+            myModal_newentry = new bootstrap.Modal(document.getElementById("modallistconfpoint"));
+            myModal_newentry.show();
         }
-        myModal_newentry = new bootstrap.Modal(document.getElementById("modalentrycrud"));
-        myModal_newentry.show();
+       
         
     };
     const RefreshHalaman = () => {
@@ -244,16 +246,14 @@
 	<slot:template slot="body">
         <div class="mb-3">
             <label for="exampleForm" class="form-label">Minbet</label>
-            <Input
-                on:keyup={handleKeyboard_float} 
-                bind:value={minbet_field}
+            <select
+                class="form-control required"
                 style="text-align: right;"
-                class="required"
-                type="text"
-                placeholder="Minbet"/>
-            <div style="text-align: right; color:blue;font-size:11px;">
-                {new Intl.NumberFormat().format(minbet_field)}
-            </div>
+                bind:value={minbet_field}>
+                {#each listmstbet as rec}
+                 <option value="{rec.lisbet_minbet}">{new Intl.NumberFormat().format(rec.lisbet_minbet)}</option>
+                {/each}
+            </select>
         </div>
         {#if sData != "New"}
         <div class="mb-3">
@@ -276,5 +276,47 @@
 	</slot:template>
 </Modal>
 
-
+<Modal
+	modal_id="modallistconfpoint"
+	modal_size="modal-dialog-centered"
+	modal_title="Configure Point - {title_minbet}"
+    modal_body_css="height:500px; overflow-y: scroll;"
+    modal_footer_css="padding:5px;"
+	modal_footer={true}>
+	<slot:template slot="body">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th NOWRAP width="1%" style="text-align: center;vertical-align: top;" >&nbsp;</th>
+                    <th NOWRAP width="1%" style="text-align: center;vertical-align: top;font-weight:bold;font-size:{table_header_font};">NO</th>
+                    <th NOWRAP width="*" style="text-align: left;vertical-align: top;font-weight:bold;font-size:{table_header_font};">NAME</th>
+                    <th NOWRAP width="10%" style="text-align: right;vertical-align: top;font-weight:bold;font-size:{table_header_font};">POINT</th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each listconfpoint_company as rec }
+                    <tr>
+                        <td NOWRAP style="text-align: center;vertical-align: top;cursor:pointer;">
+                            <i on:click={() => {
+                                    //e,id,name,idcurr,url,owner,email,phone,status,create,update
+                                    EditConfPoint(rec.companyconf_id,rec.companyconf_idbet,rec.companyconf_nmpoin,rec.companyconf_poin,
+                                    rec.companyconf_create,rec.companyconf_update);
+                                }} class="bi bi-pencil"></i>
+                        </td>
+                        <td NOWRAP style="text-align: center;vertical-align: top;font-size: {table_body_font};">{rec.companyconf_no}</td>
+                        <td NOWRAP style="text-align: left;vertical-align: top;font-size: {table_body_font};">{rec.companyconf_nmpoin}</td>
+                        <td  style="text-align: right;vertical-align: top;font-size: {table_body_font};">{new Intl.NumberFormat().format(rec.companyconf_poin)}</td>
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
+	</slot:template>
+	<slot:template slot="footer">
+        <Button on:click={() => {
+                handleSave_confpoint_generate();
+            }} 
+            button_title="Generate"
+            button_css="btn-info"/>
+	</slot:template>
+</Modal>
 
