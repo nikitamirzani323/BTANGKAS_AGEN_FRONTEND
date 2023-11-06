@@ -6,7 +6,6 @@
 	
 	import Admin from "./pages/admin/Admin.svelte";
 	import Adminrule from "./pages/adminrule/Adminrule.svelte";
-	import Company from "./pages/company/Company.svelte";
 	import Listbet from "./pages/listbet/Listbet.svelte";
 	import Login from "./pages/Login.svelte";
 	import NotFound from "./pages/NotFound.svelte";
@@ -32,14 +31,6 @@
 				},
 				component: Dashboard,
 			}),
-			
-			"/company": wrap({
-				component: Company,
-				props: {
-					table_header_font: table_header_font,
-					table_body_font: table_body_font,
-				},
-			}),
 			"/listbet": wrap({
 				component: Listbet,
 				props: {
@@ -47,9 +38,6 @@
 					table_body_font: table_body_font,
 				},
 			}),
-			
-		
-			
 			"/admin": wrap({
 				component: Admin,
 				props: {

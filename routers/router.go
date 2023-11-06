@@ -63,17 +63,5 @@ func Init() *fiber.App {
 	app.Post("/api/listbetsave", controllers.ListbetSave)
 	app.Post("/api/listbetconfsave", controllers.ListbetconfSave)
 
-	app.Post("/api/company", controllers.Companyhome)
-	app.Post("/api/companyconfpoint", controllers.Companyconfpoint)
-	app.Post("/api/companyconfpointsave", controllers.CompanyconfpointSave)
-	app.Post("/api/companyinvoice", controllers.Companyinvoice)
-	app.Post("/api/companylistbet", controllers.Companylistbet)
-	app.Post("/api/companylistbetsave", controllers.CompanylistbetSave)
-	app.Post("/api/companysave", controllers.CompanySave)
-	app.Post("/api/companyadmin", controllers.Companyadminhome)
-	app.Post("/api/companyadminbycompany", controllers.CompanyadminByCompany)
-	app.Post("/api/companyadminsave", controllers.CompanyadminSave)
-	app.Post("/api/companyadminrule", controllers.Companyadminrulehome)
-	app.Post("/api/companyadminrulesave", controllers.CompanyadminruleSave)
 	return app
 }
