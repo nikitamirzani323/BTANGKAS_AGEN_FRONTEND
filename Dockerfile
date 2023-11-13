@@ -17,5 +17,5 @@ COPY --from=gomaster /go/src/release/frontend/public /app/rontend/public
 ENV TZ=Asia/Jakarta
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-EXPOSE 2114
+EXPOSE 2144
 CMD ["./app"]
