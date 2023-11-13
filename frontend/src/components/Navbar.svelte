@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" use:link href="/" style="font-size: 13px;">DASHBOARD</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" use:link href="/transaksi" style="font-size: 13px;">TRANSAKSI</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"
                             id="navbarDropdown"
