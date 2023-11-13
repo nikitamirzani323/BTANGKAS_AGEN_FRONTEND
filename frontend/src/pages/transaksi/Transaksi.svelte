@@ -75,6 +75,7 @@
                             home_winlose_css: total_winlose_css,
                             home_card_codepoin: record[i]["transaksi_card_codepoin"],
                             home_card_pattern: record[i]["transaksi_card_pattern"],
+                            home_card_result: record[i]["transaksi_card_result"],
                             home_card_win: record[i]["transaksi_card_win"],
                             home_create: record[i]["lisbet_create"],
                             home_update: record[i]["lisbet_update"],
