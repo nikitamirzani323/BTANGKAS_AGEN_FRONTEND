@@ -77,6 +77,8 @@
                             home_card_pattern: record[i]["transaksi_card_pattern"],
                             home_card_result: record[i]["transaksi_card_result"],
                             home_card_win: record[i]["transaksi_card_win"],
+                            home_status: record[i]["transaksi_status"],
+                            home_status_css: record[i]["transaksi_status_css"],
                             home_create: record[i]["lisbet_create"],
                             home_update: record[i]["lisbet_update"],
                         },
